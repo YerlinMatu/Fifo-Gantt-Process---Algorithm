@@ -1,0 +1,66 @@
+$azulejo:#274555;
+$amarillo:#f9a11b;
+$greenSlow:#1abc9c;
+
+// HTML DESIGN
+$ancho:100%;
+table {
+   width:$ancho - 20;
+   margin: 0 auto; 
+}
+
+.title {
+  margin:0 auto;
+  display:block;
+  text-align:center;
+  margin-top:80px;
+  color:$azulejo;
+  font-size:40px;
+}
+.form{
+  .title { margin-bottom:40px;  } 
+   width:80%;
+   margin:0 auto;
+   margin-top:40px;
+   input:focus { border-color:$amarillo}
+   button.agg {
+     float:right;
+     background-color:$amarillo;
+     transtion:.4s;
+     &:active{ color:$azulejo }
+  }
+  button.btnpanel {
+     float:right;
+     transtion:.4s;
+     float:left;
+     &:active{ color:#fff }
+  }
+  .agg, .btnpanel { 
+    border:none;
+    span{ font-size:24px; line-height:24px / 2; position:absolute;   }
+    
+  } 
+  .btnpanel { background-color:$greenSlow; float:left}
+  .gantt {
+      display:block;
+      margin:0 auto;
+      text-align:center;
+      position:relative;
+  }
+
+}
+#box {
+     text-align:center;
+     overflow:scroll;
+     overflow-y:visible;
+     overflow-x:hidden;
+     width:90%;
+     height:400px;
+     margin:0 auto;
+     display:block;
+     tbody tr th {
+     margin:0 auto; 
+     text-align:center;
+     color:green;
+  }
+}

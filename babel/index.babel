@@ -1,0 +1,138 @@
+
+class Proceso {
+    constructor(nombre, rafaga, prioridad, llegada){ 
+      this.nombre = (nombre.length != 0) ? nombre : "Anonimo ".concat(cont++);
+      this.rafaga = +rafaga;
+      this.prio = +prioridad;
+      this.llegada = +llegada;
+    }
+} // end objet Process.
+// count for name objet whitout name.
+let cont = 0;
+let FIFO = []; // Storage of objets process.
+let DataGantt = [];
+// Query dom_value.
+function dom_value($id){
+    return document.getElementById($id).value;
+}
+
+// placeholder on inputs.
+const question = ['Nombre de proceso', 'Tiempo Rafaga', 'Prioridad', 'Tiempo Llegada'];
+// Send Data to storage fifo. 
+let EnviarDatos = function(){
+    let n = dom_value('nombre'),
+        r = dom_value('rafaga'),
+        p = dom_value('prio'),
+        l = dom_value('llegada'),
+        Process = new Proceso(n, r, p, l);
+        FIFO.push(Process);
+        console.table(FIFO);
+     /*   let box = document.getElementById('box');
+        ReactDOM.render(<Tabla datos={ FIFO }/>, box);  */
+        BorrarDatos();
+        
+}
+// Delete inputs 
+let BorrarDatos = function(){
+    return document.querySelector('form').reset();
+}
+let VerTabla = function (){
+    ReactDOM.render(<Tabla datos={ FIFO }/>, document.getElementById('box'));
+}
+function Gantt(){
+    var arr = [];
+    FIFO.map(x=>{
+        let objetoTemp = {
+           nombre:x.nombre,
+           llegada:Number(x.llegada)
+        };
+        
+        arr.push(objetoTemp);
+    })
+  // Sorting in action. 
+  DataGantt = arr.slice(0);
+  DataGantt = DataGantt.sort((a,b)=>{return a.llegada - b.llegada });
+  console.table(DataGantt);
+  ReactDOM.render(<GanttView datos={ DataGantt }/>, document.getElementById('box'));
+}
+// Component form.
+class FormTag extends React.Component {
+    render(){
+    return (
+      <form id="form" onsubmit="return false">
+      <div className="form">
+      <h1 className="title">{ this.props.title }</h1>
+      <input id="nombre" type="text"   placeholder={question[0]}/>
+      <input id="rafaga" type="number" placeholder={question[1]}/>
+      <input id="prio" type="number" placeholder={question[2]} min="0"/>
+      <input id="llegada" type="number" placeholder={question[3]} min="0"/>
+      <button type="button" className="agg" onClick={ EnviarDatos }>Agregar Proceso <span> +</span></button>
+      <button type="button" className="btnpanel" onClick={ VerTabla }>Ver Procesos</button>
+      <button type="button" className="gantt" onClick={ Gantt }>Ver Diagrama de gantt</button>
+    </div>
+  </form>
+          )
+    }
+};
+// Rendering form:
+ReactDOM.render(<FormTag title="ALGORITMO FIFO"/>, document.getElementById('form'));
+
+class Tabla extends React.Component{
+  render(){
+    let viewdata = this.props.datos.map(process=>{
+        return (
+            <tr>
+              <th>{ process.nombre }</th>
+              <th>{ process.rafaga }</th>
+              <th>{ process.prio   }</th>
+              <th>{ process.llegada}</th>
+            </tr>
+                )
+    })
+    return (
+     <div>
+      <table>
+          <thead>
+            <tr>
+              <th>PROCESO</th>
+              <th>TIEMPO DE RAFAGA</th>
+              <th>PRIORIDA</th>
+              <th>TIEMPO DE LLEGADA MS</th>
+            </tr>
+          </thead>
+          <tbody>
+            { viewdata}
+          </tbody>
+        </table>
+      </div>
+      )
+     }
+}
+
+class GanttView extends React.Component{
+  render(){
+    let viewgantt = this.props.datos.map(process=>{
+        return (
+            <tr>
+              <th>{ process.nombre }</th>
+              <th>{ process.llegada }</th>
+            </tr>
+                )
+    })
+    return (
+     <div>
+      <table>
+          <thead>
+            <tr>
+              <th>PROCESO</th>
+              <th>TIEMPO DE LLEGADA</th>
+            </tr>
+          </thead>
+          <tbody>
+            { viewgantt }
+          </tbody>
+        </table>
+      </div>
+      )
+     }
+}

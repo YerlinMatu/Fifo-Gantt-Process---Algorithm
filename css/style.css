@@ -1,0 +1,75 @@
+table {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  margin-top: 80px;
+  color: #274555;
+  font-size: 40px;
+}
+
+.form {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.form .title {
+  margin-bottom: 40px;
+}
+.form input:focus {
+  border-color: #f9a11b;
+}
+.form button.agg {
+  float: right;
+  background-color: #f9a11b;
+  transtion: .4s;
+}
+.form button.agg:active {
+  color: #274555;
+}
+.form button.btnpanel {
+  float: right;
+  transtion: .4s;
+  float: left;
+}
+.form button.btnpanel:active {
+  color: #fff;
+}
+.form .agg, .form .btnpanel {
+  border: none;
+}
+.form .agg span, .form .btnpanel span {
+  font-size: 24px;
+  line-height: 24px / 2;
+  position: absolute;
+}
+.form .btnpanel {
+  background-color: #1abc9c;
+  float: left;
+}
+.form .gantt {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+#box {
+  text-align: center;
+  overflow: scroll;
+  overflow-y: visible;
+  overflow-x: hidden;
+  width: 90%;
+  height: 400px;
+  margin: 0 auto;
+  display: block;
+}
+#box tbody tr th {
+  margin: 0 auto;
+  text-align: center;
+  color: green;
+}
